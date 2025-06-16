@@ -1,0 +1,140 @@
+.reading-mode-container {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  position: relative;
+  padding: 0 1rem;
+}
+
+.reading-page {
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  min-height: 400px;
+  display: flex;
+  flex-direction: column;
+}
+
+.page-content {
+  flex-grow: 1;
+  overflow-y: auto;
+}
+
+.page-title {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.page-subtitle {
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+.markdown-content {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  font-size: 16px;
+}
+
+.markdown-content strong {
+  font-weight: 700;
+}
+
+.markdown-content ul,
+.markdown-content ol {
+  padding-left: 20px;
+  margin-bottom: 0.5rem;
+}
+
+.markdown-content li {
+  margin-bottom: 0.3rem;
+  list-style-type: disc;
+}
+
+.markdown-content ol li {
+  list-style-type: decimal;
+}
+
+.markdown-content p {
+  margin-bottom: 0.5rem;
+}
+
+.page-buttons {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: flex-end;
+  padding-top: 0.5rem;
+}
+
+.navigation-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.nav-button {
+  background-color: #0A21C0;
+  color: #FFFFFF;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.nav-button:disabled {
+  background-color: #6c757d;
+  cursor: not-allowed;
+}
+
+.pagination-dots {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  background-color: #6c757d;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.dot.active {
+  background-color: #0A21C0;
+}
+
+@media (max-width: 991.98px) {
+  .reading-page {
+    padding: 1.2rem;
+    min-height: 350px;
+  }
+  .page-title {
+    font-size: 1.4rem;
+  }
+  .markdown-content {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .reading-page {
+    padding: 1rem;
+    min-height: 300px;
+  }
+  .page-title {
+    font-size: 1.3rem;
+  }
+  .page-subtitle {
+    font-size: 0.8rem;
+  }
+  .markdown-content {
+    font-size: 14px;
+  }
+  .nav-button {
+    padding: 0.4rem 0.8rem;
+    font-size: 1rem;
+  }
+}

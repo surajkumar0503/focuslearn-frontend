@@ -1,0 +1,285 @@
+.landing-page-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.hero {
+  padding: 5rem 0;
+}
+
+.hero h1 {
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  font-size: 3.5rem;
+}
+
+.hero .btn-primary {
+  padding: 0.75rem 2rem;
+  font-weight: 600;
+  transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+}
+
+.hero .btn-primary:hover {
+  background-color: #050A44;
+  box-shadow: 0 4px 12px rgba(5, 10, 68, 0.3);
+}
+
+.slide {
+  padding: 4rem 0;
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+}
+
+.what-is {
+  background: linear-gradient(135deg, #F8F9FA, #E5E7EB);
+}
+
+[data-theme="dark"] .what-is {
+  background: linear-gradient(135deg, #141619, #2A2F33);
+}
+
+.how-it-works {
+  background: linear-gradient(135deg, #F8F9FA, #E5E7EB);
+}
+
+[data-theme="dark"] .how-it-works {
+  background: linear-gradient(135deg, #141619, #2A2F33);
+}
+
+.call-to-action {
+  padding: 4rem 0;
+  text-align: center;
+}
+
+.what-is h2, .how-it-works h2, .call-to-action h2 {
+  font-weight: 700;
+  font-size: 2.5rem;
+}
+
+.what-is p, .how-it-works p, .call-to-action p {
+  font-size: 1.1rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.steps-container {
+  gap: 1.5rem;
+  justify-content: center;
+}
+
+.step {
+  flex: 1;
+  max-width: 220px;
+  position: relative;
+  padding: 1.5rem;
+}
+
+.step-number {
+  position: absolute;
+  top: -1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #0A21C0;
+  color: #FFFFFF;
+  border-radius: 50%;
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.step h4 {
+  font-weight: 600;
+  margin-top: 1.5rem;
+}
+
+.step p {
+  font-size: 0.95rem;
+}
+
+.step i.bi-arrow-right {
+  margin: 1rem 0;
+}
+
+.features {
+  padding: 3.5rem 0;
+}
+
+.features h2 {
+  font-weight: 600;
+  margin-bottom: 2rem;
+  font-size: 2.5rem;
+}
+
+.feature-card {
+  background: var(--card-bg);
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1rem;
+  overflow: hidden;
+}
+
+.feature-card:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+.feature-card h4 {
+  font-weight: 600;
+  font-size: 1.25rem;
+}
+
+.feature-card p {
+  font-size: 0.95rem;
+  flex-grow: 1;
+}
+
+.feature-card i {
+  margin-top: 1rem;
+}
+
+:root {
+  --card-bg: #F8F9FA;
+}
+
+[data-theme="dark"] {
+  --card-bg: #2A2F33;
+}
+
+@media (max-width: 1199.98px) {
+  .hero h1 {
+    font-size: 3rem;
+  }
+  .steps-container {
+    gap: 1rem;
+  }
+  .step {
+    max-width: 200px;
+  }
+}
+
+@media (max-width: 991.98px) {
+  .hero {
+    padding: 3.5rem 0;
+  }
+  .hero h1 {
+    font-size: 2.75rem;
+  }
+  .slide {
+    padding: 3rem 0;
+    min-height: auto;
+  }
+  .steps-container {
+    flex-direction: column;
+    align-items: center;
+  }
+  .step {
+    max-width: 100%;
+    padding: 1rem;
+  }
+  .step i.bi-arrow-right {
+    display: none;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .hero {
+    padding: 2.5rem 0;
+  }
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+  .what-is h2, .how-it-works h2, .call-to-action h2 {
+    font-size: 2rem;
+  }
+  .what-is p, .how-it-works p, .call-to-action p {
+    font-size: 1rem;
+  }
+  .features {
+    padding: 2.5rem 0;
+  }
+  .features h2 {
+    font-size: 2rem;
+  }
+  .feature-card {
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 679.98px) {
+  .features .col-md-6 {
+    width: 100%;
+  }
+}
+
+@media (min-width: 680px) and (max-width: 1020px) {
+  .features .col-md-6 {
+    width: 50%;
+  }
+}
+
+@media (min-width: 1021px) {
+  .features .col-md-6 {
+    width: 33.33333333%;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .hero {
+    padding: 2rem 0;
+  }
+  .hero h1 {
+    font-size: 2rem;
+  }
+  .hero .btn-primary {
+    padding: 0.6rem 1.5rem;
+    font-size: 0.95rem;
+  }
+  .slide {
+    padding: 2rem 0;
+  }
+  .what-is h2, .how-it-works h2, .call-to-action h2 {
+    font-size: 1.8rem;
+  }
+  .step p {
+    font-size: 0.9rem;
+  }
+  .feature-card h4 {
+    font-size: 1.1rem;
+  }
+  .feature-card p {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 500px) {
+  .features {
+    padding: 2rem 0;
+  }
+  .features .container {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+  .feature-card {
+    padding: 0.8rem;
+    margin-bottom: 1rem;
+  }
+  .feature-card h4 {
+    font-size: 1rem;
+  }
+  .feature-card p {
+    font-size: 0.85rem;
+  }
+  .feature-card i {
+    font-size: 1.5rem;
+  }
+}

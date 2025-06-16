@@ -1,0 +1,33 @@
+.notes-page-container {
+  min-height: 90vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.notes-page-container main {
+  flex-grow: 1;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1.5rem;
+}
+
+.form-check-input:checked {
+  background-color: #0A21C0;
+  border-color: #0A21C0;
+}
+
+@media (max-width: 991.98px) {
+  .notes-page-container main {
+    padding: 1.2rem;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .notes-page-container main {
+    padding: 1rem;
+  }
+  .form-check-label {
+    font-size: 0.85rem;
+  }
+}
