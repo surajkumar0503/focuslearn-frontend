@@ -1,0 +1,15 @@
+services:
+  - type: static
+    name: focuslearn-frontend
+    env: static
+    repo: https://github.com/surajkumar0503/focuslearn-frontend
+    branch: main
+    buildCommand: npm install && npm run build
+    staticPublishPath: dist
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+    envVars:
+      - key: VITE_API_URL
+        value: https://focuslearn-backend.onrender.com
