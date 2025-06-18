@@ -61,20 +61,20 @@ function WhatIsSection({ isDarkMode }) {
         <motion.div variants={fadeIn} whileHover={{ scale: 1.1 }} animate={parallax}>
           <i className="bi bi-journal-text fs-1" style={{ color: isDarkMode ? COLORS.primary : COLORS.secondary }}></i>
         </motion.div>
-        <motion.a
-          href="/notes"
-          className="btn btn-primary btn-lg mt-3"
-          style={{
-            backgroundColor: COLORS.primary,
-            color: COLORS.textDark,
-            border: "none",
-          }}
-          aria-label="Go to My Notes"
-          whileHover={hoverScale}
-          variants={fadeIn}
-        >
-          Take me to My Notes
-        </motion.a>
+        <motion.div whileHover={hoverScale} variants={fadeIn}>
+          <Link
+            to="/notes"
+            className="btn btn-primary btn-lg mt-3"
+            style={{
+              backgroundColor: COLORS.primary,
+              color: COLORS.textDark,
+              border: "none",
+            }}
+            aria-label="Go to My Notes"
+          >
+            Take me to My Notes
+          </Link>
+        </motion.div>
       </div>
     </motion.section>
   );
