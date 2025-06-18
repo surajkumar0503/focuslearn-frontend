@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { toast as showToast } from "react-toastify";
+import { validateLink, extractVideoId, extractPlaylistId } from "../utils/youtubeUtils";
 
 const fetchWithRetry = async (url, options, retries = 3, delay = 1000) => {
   for (let i = 0; i < retries; i++) {
@@ -13,22 +14,14 @@ const fetchWithRetry = async (url, options, retries = 3, delay = 1000) => {
   }
 };
 
-const useVideoData = () => {
-  const [videoData, setVideoData] = useState(null);
-  const [playlistData, setPlaylistData] = useState(null);
+export function useVideoData(videoUrl) {
   const [selectedVideoId, setSelectedVideoId] = useState(null);
+  const [videoData, setVideoData] = useState(null);
+  const [isValid, setIsValid] = useState(false);
 
-  const extractVideoId = (url) => {
-    const regex = /[?&]v=([^&#]*)/;
-    const match = url.match(regex);
-    return match ? match[1] : null;
-  };
-
-  const extractPlaylistId = (url) => {
-    const regex = /[?&]list=([^&#]*)/;
-    const match = url.match(regex);
-    return match ? match[1] : null;
-  };
+  useEffect(() => {
+    setIsValid(validateLink(videoUrl));
+  }, [videoUrl]);
 
   const fetchVideoData = async (url) => {
     try {
@@ -78,7 +71,8 @@ const useVideoData = () => {
         throw new Error(errorData.error || "Unknown error");
       }
       const data = await response.json();
-      setPlaylistData(data);
+      setVideoData({ videos: data.videos });
+      setSelectedVideoId(data.videos[0]?.id);
       showToast.success("Playlist data fetched successfully!");
     } catch (err) {
       console.error("Fetch playlist error:", err);
@@ -87,13 +81,10 @@ const useVideoData = () => {
   };
 
   return {
-    videoData,
-    playlistData,
     selectedVideoId,
-    fetchVideoData,
-    fetchPlaylistData,
     setSelectedVideoId,
+    videoData,
+    isValid,
+    fetchVideoData,
   };
-};
-
-export default useVideoData;
+}
