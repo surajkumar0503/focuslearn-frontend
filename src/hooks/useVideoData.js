@@ -2,18 +2,6 @@ import { useState, useEffect } from "react";
 import { toast as showToast } from "react-toastify";
 import { validateLink, extractVideoId, extractPlaylistId } from "../utils/youtubeUtils";
 
-const fetchWithRetry = async (url, options, retries = 3, delay = 1000) => {
-  for (let i = 0; i < retries; i++) {
-    try {
-      const response = await fetch(url, options);
-      return response;
-    } catch (err) {
-      if (i === retries - 1) throw err;
-      await new Promise((resolve) => setTimeout(resolve, delay));
-    }
-  }
-};
-
 export function useVideoData(videoUrl) {
   const [selectedVideoId, setSelectedVideoId] = useState(null);
   const [videoData, setVideoData] = useState(null);
@@ -24,6 +12,7 @@ export function useVideoData(videoUrl) {
   }, [videoUrl]);
 
   const fetchVideoData = async (url) => {
+    console.log('Fetching video for URL:', url);
     try {
       const isPlaylist = url.includes("list=");
       if (isPlaylist) {
@@ -35,16 +24,19 @@ export function useVideoData(videoUrl) {
         showToast.error("Invalid YouTube video link!");
         return;
       }
-      const response = await fetchWithRetry(`${import.meta.env.VITE_API_URL}/fetch_video`, {
+      console.log('Calling API:', `${import.meta.env.VITE_API_URL}/fetch_video`, { videoId });
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/fetch_video`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ videoId }),
       });
+      console.log('API response status:', response.status);
       if (!response.ok) {
         const errorData = await response.json();
         throw new Error(errorData.error || "Unknown error");
       }
       const data = await response.json();
+      console.log('API response data:', data);
       setVideoData(data);
       setSelectedVideoId(videoId);
       showToast.success("Video data fetched successfully!");
@@ -55,22 +47,26 @@ export function useVideoData(videoUrl) {
   };
 
   const fetchPlaylistData = async (url) => {
+    console.log('Fetching playlist for URL:', url);
     try {
       const playlistId = extractPlaylistId(url);
       if (!playlistId) {
         showToast.error("Invalid YouTube playlist link!");
         return;
       }
-      const response = await fetchWithRetry(`${import.meta.env.VITE_API_URL}/fetch_playlist`, {
+      console.log('Calling API:', `${import.meta.env.VITE_API_URL}/fetch_playlist`, { playlistId });
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/fetch_playlist`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ playlistId }),
       });
+      console.log('API response status:', response.status);
       if (!response.ok) {
         const errorData = await response.json();
         throw new Error(errorData.error || "Unknown error");
       }
       const data = await response.json();
+      console.log('API response data:', data);
       setVideoData({ videos: data.videos });
       setSelectedVideoId(data.videos[0]?.id);
       showToast.success("Playlist data fetched successfully!");
