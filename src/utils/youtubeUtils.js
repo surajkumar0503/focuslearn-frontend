@@ -1,15 +1,15 @@
-export const validateLink = (link) => {
-  return /(?:https?:\/\/)?(?:www\.)?(youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/playlist\?list=)/.test(link);
+export const validateLink = (url) => {
+  return url && (url.includes("youtube.com") || url.includes("youtu.be"));
 };
 
 export const extractVideoId = (url) => {
-  const match = url.match(
-    /(?:https:\/\/(?:www\.youtube\.com\/watch\?v=|youtu\.be\/))([a-zA-Z0-9_-]{11})/
-  );
+  const regex = /[?&]v=([^&#]*)/;
+  const match = url.match(regex);
   return match ? match[1] : null;
 };
 
 export const extractPlaylistId = (url) => {
-  const match = url.match(/[?&]list=([a-zA-Z0-9_-]+)/);
+  const regex = /[?&]list=([^&#]*)/;
+  const match = url.match(regex);
   return match ? match[1] : null;
 };
