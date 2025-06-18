@@ -50,9 +50,15 @@ function HeroSection({ isDarkMode }) {
           with rich Markdown formatting for a seamless learning experience.
         </motion.p>
 
-        <div className="d-flex gap-3 justify-content-center">
-          <motion.a
-            href="/app"
+
+        <motion.div
+          className="d-flex gap-3 justify-content-center"
+          whileHover={hoverScale}
+          animate={pulse}
+          variants={fadeIn}
+        >
+          <Link
+            to="/app"
             className="btn btn-primary btn-lg"
             style={{
               backgroundColor: COLORS.primary,
@@ -60,13 +66,10 @@ function HeroSection({ isDarkMode }) {
               border: "none",
             }}
             aria-label="Start using FocusLearn"
-            whileHover={hoverScale}
-            animate={pulse}
-            variants={fadeIn}
           >
             Get Started
-          </motion.a>
-        </div>
+          </Link>
+        </motion.div>
       </div>
     </motion.section>
   );
