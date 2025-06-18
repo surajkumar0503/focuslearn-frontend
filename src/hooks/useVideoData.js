@@ -1,15 +1,34 @@
-import { useState, useEffect } from "react";
-import { showToast } from "../utils/toastUtils";
-import { validateLink, extractVideoId, extractPlaylistId } from "../utils/youtubeUtils";
+import { useState } from "react";
+import { toast as showToast } from "react-toastify";
 
-export function useVideoData(videoUrl) {
-  const [selectedVideoId, setSelectedVideoId] = useState(null);
+const fetchWithRetry = async (url, options, retries = 3, delay = 1000) => {
+  for (let i = 0; i < retries; i++) {
+    try {
+      const response = await fetch(url, options);
+      return response;
+    } catch (err) {
+      if (i === retries - 1) throw err;
+      await new Promise((resolve) => setTimeout(resolve, delay));
+    }
+  }
+};
+
+const useVideoData = () => {
   const [videoData, setVideoData] = useState(null);
-  const [isValid, setIsValid] = useState(false);
+  const [playlistData, setPlaylistData] = useState(null);
+  const [selectedVideoId, setSelectedVideoId] = useState(null);
 
-  useEffect(() => {
-    setIsValid(validateLink(videoUrl));
-  }, [videoUrl]);
+  const extractVideoId = (url) => {
+    const regex = /[?&]v=([^&#]*)/;
+    const match = url.match(regex);
+    return match ? match[1] : null;
+  };
+
+  const extractPlaylistId = (url) => {
+    const regex = /[?&]list=([^&#]*)/;
+    const match = url.match(regex);
+    return match ? match[1] : null;
+  };
 
   const fetchVideoData = async (url) => {
     try {
@@ -23,7 +42,7 @@ export function useVideoData(videoUrl) {
         showToast.error("Invalid YouTube video link!");
         return;
       }
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/fetch_video`, {
+      const response = await fetchWithRetry(`${import.meta.env.VITE_API_URL}/fetch_video`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ videoId }),
@@ -49,7 +68,7 @@ export function useVideoData(videoUrl) {
         showToast.error("Invalid YouTube playlist link!");
         return;
       }
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/fetch_playlist`, {
+      const response = await fetchWithRetry(`${import.meta.env.VITE_API_URL}/fetch_playlist`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ playlistId }),
@@ -59,8 +78,7 @@ export function useVideoData(videoUrl) {
         throw new Error(errorData.error || "Unknown error");
       }
       const data = await response.json();
-      setVideoData({ videos: data.videos });
-      setSelectedVideoId(data.videos[0]?.id);
+      setPlaylistData(data);
       showToast.success("Playlist data fetched successfully!");
     } catch (err) {
       console.error("Fetch playlist error:", err);
@@ -69,10 +87,13 @@ export function useVideoData(videoUrl) {
   };
 
   return {
-    selectedVideoId,
-    setSelectedVideoId,
     videoData,
-    isValid,
+    playlistData,
+    selectedVideoId,
     fetchVideoData,
+    fetchPlaylistData,
+    setSelectedVideoId,
   };
-}
+};
+
+export default useVideoData;
