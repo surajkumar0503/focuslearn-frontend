@@ -2,6 +2,8 @@ import React from "react";
 import { motion } from "framer-motion";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { COLORS } from "../../utils/colors";
+import { Link } from "react-router-dom";
+
 
 function WhatIsSection({ isDarkMode }) {
   const sectionVariants = {
