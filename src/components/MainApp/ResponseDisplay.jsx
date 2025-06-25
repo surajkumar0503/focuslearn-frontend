@@ -68,8 +68,8 @@ function ResponseDisplay({ displayText, videoId }) {
         whiteSpace: "pre-wrap",
         marginLeft: "20px",
         marginRight: "10px",
-        padding: "8px", // Minimal padding
-        backgroundColor: "#F8F9FA", // Fixed light grey background
+        padding: "8px",
+        backgroundColor: "#F8F9FA", 
         position: "relative",
       }}
     >
@@ -82,8 +82,8 @@ function ResponseDisplay({ displayText, videoId }) {
           padding: "8px",
           fontSize: "1.2rem",
           cursor: "pointer",
-          backgroundColor: "#CCCCCC", // Fixed button background
-          color: "#141619", // Fixed text color
+          backgroundColor: "#CCCCCC",
+          color: "#141619", 
           border: "none",
           borderRadius: "5px",
           display: "flex",
@@ -104,11 +104,10 @@ function ResponseDisplay({ displayText, videoId }) {
           position: "absolute",
           top: "10px",
           right: "90px",
-          padding: "8px 16px",
+          padding: "0.5rem 1rem",
           fontSize: "1rem",
           cursor: "pointer",
-          backgroundColor: "#CCCCCC", // Fixed button background
-          color: "#141619", // Fixed text color
+          backgroundColor: "#CCCCCC", 
           border: "none",
           borderRadius: "5px",
           animation: isSaveClicked ? "buttonClick 0.2s ease" : "none",
@@ -127,8 +126,8 @@ function ResponseDisplay({ displayText, videoId }) {
           marginTop: "3rem",
           fontFamily: "Arial, sans-serif",
           lineHeight: "1.5",
-          color: "#141619", // Fixed text color
-          fontSize: "16px", // Constant font size
+          color: "#141619", 
+          fontSize: "1rem", 
           maxWidth: "100%",
         }}
       >
@@ -144,12 +143,12 @@ function ResponseDisplay({ displayText, videoId }) {
           div.rounded-2 {
             margin-left: 10px !important;
             margin-right: 10px !important;
-            padding: 8px !important; // Minimal padding
+            padding: 8px !important; 
           }
           .markdown-content {
             margin-top: 3rem !important;
-            font-size: 16px !important; // Constant font size
-            color: #141619 !important; // Fixed text color
+            font-size: 16px !important; 
+            color: #141619 !important; 
           }
           button {
             padding: 6px !important;
@@ -168,12 +167,12 @@ function ResponseDisplay({ displayText, videoId }) {
           div.rounded-2 {
             margin-left: 20px !important;
             margin-right: 15px !important;
-            padding: 8px !important; // Minimal padding
+            padding: 8px !important; 
           }
           .markdown-content {
-            margin-top: 1.8rem !important;
-            font-size: 16px !important; // Constant font size
-            color: #141619 !important; // Fixed text color
+            margin-top: 3rem !important;
+            font-size: 16px !important; 
+            color: #141619 !important; 
           }
           button {
             padding: 7px !important;
