@@ -57,6 +57,11 @@ function QueryInput({ selectedVideoId, setDisplayText }) {
         setIsLoading(false);
         return;
       }
+      if (!data.transcriptAvailable) {
+        toast.warn("Public transcript unavailable, response based on video metadata.");
+        toast.info("Public transcript service works on local not production.");
+        
+      }
       console.log(`Received response: "${data.response.substring(0, 100)}..."`);
       setIsLoading(false);
       startTypewriterEffect(data.response);
